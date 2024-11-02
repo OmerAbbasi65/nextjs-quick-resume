@@ -1,100 +1,84 @@
-import Image from "next/image";
+// app/page.tsx
+import Link from 'next/link';
 
 export default function Home() {
   return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="https://nextjs.org/icons/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-semibold">
-              app/page.tsx
-            </code>
-            .
-          </li>
-          <li>Save and see your changes instantly.</li>
-        </ol>
-
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
+    <div className="text-center min-h-screen bg-gradient-to-b from-purple-500 via-pink-500 to-blue-500 text-white">
+      {/* Navbar */}
+      <nav className="flex justify-center items-center p-4 md:p-6 relative">
+        {/* Left Chevron SVG pointing right */}
+        <div className="mr-0 animate-slide-chevron-right">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            className="h-8 w-8 md:h-12 md:w-12 text-white"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+            strokeWidth={2}
           >
-            <Image
-              className="dark:invert"
-              src="https://nextjs.org/icons/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:min-w-44"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
+            <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
+          </svg>
         </div>
-      </main>
-      <footer className="row-start-3 flex gap-6 flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="https://nextjs.org/icons/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="https://nextjs.org/icons/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="https://nextjs.org/icons/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
+
+        <h1 className="text-xl md:text-3xl font-bold mx-2 md:mx-4">Quick Resume</h1>
+
+        {/* Right Chevron SVG pointing left */}
+        <div className="ml-0 animate-slide-chevron-left">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            className="h-8 w-8 md:h-12 md:w-12 text-white"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+            strokeWidth={2}
+          >
+            <path strokeLinecap="round" strokeLinejoin="round" d="M15 5l-7 7 7 7" />
+          </svg>
+        </div>
+      </nav>
+
+      {/* Main Section */}
+      <div className="flex flex-col items-center justify-center min-h-[60vh] h-auto px-4 md:px-8 text-center">
+        <h2 className="text-2xl md:text-4xl font-bold mb-4 md:mb-6">Build Your Professional Resume</h2>
+        <p className="text-sm md:text-lg mb-4 md:mb-8">
+          Start building your resume with our easy-to-use builder. Choose from our professional templates.
+        </p>
+
+        <section id="templates" className="p-4 md:p-12 py-3">
+          <h3 className="text-lg md:text-2xl font-bold mb-4 md:mb-8 text-center">Choose Your Template</h3>
+          <div className="grid grid-cols-1 gap-6 md:grid-cols-2 max-w-md md:max-w-4xl mx-auto">
+            {/* Template Card 1 */}
+            <div className="bg-white text-gray-800 p-4 md:p-6 rounded-lg shadow-lg hover:shadow-2xl transition transform hover:scale-105">
+              <h4 className="text-lg md:text-xl font-bold mb-2 md:mb-4">Template 1 (Without Image)</h4>
+              <p className="text-gray-600 mb-2 md:mb-4 text-sm md:text-base">
+                A simple text-focused template for professionals.
+              </p>
+              <Link href="/basic-resume">
+                <button className="px-3 py-2 md:px-4 md:py-2 bg-purple-500 text-white rounded-lg shadow-md hover:bg-purple-600 transition">
+                  Select Template
+                </button>
+              </Link>
+            </div>
+
+            {/* Template Card 2 */}
+            <div className="bg-white text-gray-800 p-4 md:p-6 rounded-lg shadow-lg hover:shadow-2xl transition transform hover:scale-105">
+              <h4 className="text-lg md:text-xl font-bold mb-2 md:mb-4">Template 2 (With Image)</h4>
+              <p className="text-gray-600 mb-2 md:mb-4 text-sm md:text-base">
+                A modern template with a profile image.
+              </p>
+              <Link href="/image-resume">
+                <button className="px-3 py-2 md:px-4 md:py-2 bg-blue-500 text-white rounded-lg shadow-md hover:bg-blue-600 transition">
+                  Select Template
+                </button>
+              </Link>
+            </div>
+          </div>
+        </section>
+      </div>
+
+      {/* Footer */}
+      <footer className="text-center mt-10 py-4 md:py-4 bg-gray-800 text-sm md:text-base">
+        <p className="text-gray-400">© 2024 Quick Resume. All rights reserved.</p>
       </footer>
     </div>
   );
