@@ -1,12 +1,20 @@
 // app/pic-resume-ready/page.jsx
 "use client";
+import { Suspense, useRef, useState } from "react";
 import { useSearchParams } from "next/navigation";
-import { useRef, useState } from "react";
-import Image from "next/image"; // Import Image component
+import Image from "next/image";
 import { jsPDF } from "jspdf";
-import autoTable from 'jspdf-autotable';
+import autoTable from "jspdf-autotable";
 
-export default function PicResumeReady() {
+export default function PicResumeReadyWrapper() {
+  return (
+    <Suspense fallback={<p>Loading...</p>}>
+      <PicResumeReady />
+    </Suspense>
+  );
+}
+
+function PicResumeReady() {
   const searchParams = useSearchParams();
   const resumeRef = useRef();
   const [imageBase64, setImageBase64] = useState(null);
@@ -28,7 +36,6 @@ export default function PicResumeReady() {
     imageBase64
   };
 
-  // Image upload and conversion to base64
   const handleImageUpload = (event) => {
     const file = event.target.files[0];
     if (file && file.type === "image/png") {
@@ -42,39 +49,39 @@ export default function PicResumeReady() {
 
   const handleDownloadPDF = () => {
     const doc = new jsPDF("p", "pt", "a4");
-
     let yPosition = 60;
 
-    // Centered Header with Image
     if (imageBase64) {
-      doc.addImage(imageBase64, "PNG", 250, 20, 100, 100); // Center the image horizontally
+      doc.addImage(imageBase64, "PNG", 250, 20, 100, 100);
     }
     doc.setFontSize(16);
     doc.text(`${formData.name}`, 300, yPosition + 120, { align: "center" });
 
     autoTable(doc, {
       startY: yPosition + 140,
-      head: [['Section', 'Details']],
+      head: [["Section", "Details"]],
       body: [
-        ['Profile', formData.profile],
-        ['Experience', formData.experience],
-        ['Education', formData.education],
-        ['Skills', formData.skills],
-        ['Languages', formData.languages],
-        ['Contact', formData.contact],
-        ['Personal Info', 
+        ["Profile", formData.profile],
+        ["Experience", formData.experience],
+        ["Education", formData.education],
+        ["Skills", formData.skills],
+        ["Languages", formData.languages],
+        ["Contact", formData.contact],
+        [
+          "Personal Info",
           `Name: ${formData.name}\n
           Birthdate: ${formData.birthdate}\n
           Gender: ${formData.gender}\n
           Residence: ${formData.residence}\n
           Nationality: ${formData.nationality}\n
-          CNIC: ${formData.cnic}`]
+          CNIC: ${formData.cnic}`
+        ]
       ],
       didDrawPage: (data) => {
         yPosition = data.cursor.y + 20;
       },
       margin: { top: 70, left: 40, right: 40, bottom: 40 },
-      theme: 'striped',
+      theme: "striped"
     });
 
     const pageCount = doc.internal.getNumberOfPages();
@@ -99,7 +106,7 @@ export default function PicResumeReady() {
             width={96}
             height={96}
             className="w-24 h-24 rounded-full mb-4 mx-auto"
-            priority // ensures the image is loaded quickly
+            priority
           />
         )}
         <h1 className="text-4xl font-bold text-center">{formData.name}</h1>
