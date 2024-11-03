@@ -9,6 +9,15 @@ export default function ResumeReady() {
   const { formData } = useFormContext(); // Access form data from context
   const resumeRef = useRef();
 
+  // If formData is not available, display a loading message or error message
+  if (!formData) {
+    return (
+      <div className="min-h-screen flex items-center justify-center">
+        <p>Loading resume data...</p>
+      </div>
+    );
+  }
+
   const handleDownloadPDF = () => {
     const doc = new jsPDF("p", "pt", "a4");
 
