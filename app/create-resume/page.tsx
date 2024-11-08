@@ -2,7 +2,7 @@
 "use client";
 
 import { useState } from "react";
-import { useRouter } from "next/navigation";
+// import { useRouter } from "next/navigation";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import { useFormContext } from "../context/FormContext";
@@ -10,7 +10,7 @@ import jsPDF from "jspdf";
 import autoTable from "jspdf-autotable";
 
 const CreateResume = () => {
-  const router = useRouter();
+  // const router = useRouter();
   const { setFormData } = useFormContext();
   const [optionalFields, setOptionalFields] = useState([
     { name: "profile", label: "Profile" },
