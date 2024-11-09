@@ -46,7 +46,12 @@ const CreateResume = () => {
       contact: Yup.string().max(100),
     }),
     onSubmit: async (values) => {
-      setFormData(values);
+      const formData = new FormData();
+      for (const key in values) {
+        formData.append(key, values[key as keyof typeof values]);
+      }
+      setFormData(formData);
+
       const response = await fetch("/api/saveResume", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -75,7 +80,7 @@ const CreateResume = () => {
     pdf.text("Resume", 14, 10);
     autoTable(pdf, {
       startY: 20,
-      head: [["Field", "Value"]],
+      head: [["Section", "Details"]],
       body: [
         ["Name", formik.values.name],
         ["Birthdate", formik.values.birthdate],
