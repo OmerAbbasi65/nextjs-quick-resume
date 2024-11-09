@@ -2,7 +2,6 @@
 "use client";
 
 import { useState } from "react";
-// import { useRouter } from "next/navigation";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import { useFormContext } from "../context/FormContext";
@@ -10,7 +9,6 @@ import jsPDF from "jspdf";
 import autoTable from "jspdf-autotable";
 
 const CreateResume = () => {
-  // const router = useRouter();
   const { setFormData } = useFormContext();
   const [optionalFields, setOptionalFields] = useState([
     { name: "profile", label: "Profile" },
@@ -35,7 +33,7 @@ const CreateResume = () => {
       experience: "",
       education: "",
       skills: "",
-    },
+    } as Record<string, string>,
     validationSchema: Yup.object({
       name: Yup.string().max(50).required("Required"),
       birthdate: Yup.date().required("Required"),
@@ -130,7 +128,9 @@ const CreateResume = () => {
                 {...formik.getFieldProps(field.toLowerCase())}
                 className="mt-1 block w-full p-2 border rounded border-gray-300"
               />
-              {formik.touched[field.toLowerCase()] && formik.errors[field.toLowerCase()] && <div className="text-red-500 text-sm">{formik.errors[field.toLowerCase()]}</div>}
+              {formik.touched[field.toLowerCase()] && formik.errors[field.toLowerCase()] && (
+                <div className="text-red-500 text-sm">{formik.errors[field.toLowerCase()]}</div>
+              )}
             </div>
           ))}
 
