@@ -33,7 +33,7 @@ const CreateResume = () => {
       experience: "",
       education: "",
       skills: "",
-    } as Record<string, string>,
+    },
     validationSchema: Yup.object({
       name: Yup.string().max(50).required("Required"),
       birthdate: Yup.date().required("Required"),
@@ -48,7 +48,7 @@ const CreateResume = () => {
     onSubmit: async (values) => {
       const formData = new FormData();
       for (const key in values) {
-        formData.append(key, values[key as keyof typeof values]);
+        formData.append(key, values[key]);
       }
       setFormData(formData);
 
@@ -70,7 +70,7 @@ const CreateResume = () => {
     }
   };
 
-  const handleRemoveField = (name: string) => {
+  const handleRemoveField = (name) => {
     setOptionalFields((prev) => prev.filter((field) => field.name !== name));
     formik.setFieldValue(name, "");
   };
