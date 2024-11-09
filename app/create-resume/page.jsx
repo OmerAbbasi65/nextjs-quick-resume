@@ -1,4 +1,4 @@
-// app/create-resume/page.tsx
+// app/create-resume/page.jsx
 "use client";
 
 import { useState } from "react";
@@ -16,7 +16,7 @@ const CreateResume = () => {
     { name: "education", label: "Education" },
     { name: "skills", label: "Skills" },
   ]);
-  const [generatedLink, setGeneratedLink] = useState<string | null>(null);
+  const [generatedLink, setGeneratedLink] = useState(null);
 
   const formik = useFormik({
     initialValues: {
