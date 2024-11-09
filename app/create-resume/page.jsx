@@ -16,7 +16,6 @@ const CreateResume = () => {
         { name: "education", label: "Education" },
         { name: "skills", label: "Skills" },
     ]);
-    const [generatedLink, setGeneratedLink] = useState(null);
 
     const formik = useFormik({
         initialValues: {
@@ -51,25 +50,6 @@ const CreateResume = () => {
                 formData.append(key, values[key]);
             }
             setFormData(formData);
-
-            try {
-                const response = await fetch("/api/saveResume", {
-                    method: "POST",
-                    headers: { "Content-Type": "application/json" },
-                    body: JSON.stringify(values),
-                });
-
-                if (!response.ok) throw new Error("Failed to generate link");
-
-                const { id } = await response.json();
-                if (id) {
-                    const generatedURL = `${window.location.origin}/resume/${id}`;
-                    setGeneratedLink(generatedURL);
-                }
-            } catch (error) {
-                console.error("Error generating link:", error);
-                alert("There was an issue generating the resume link. Please try again.");
-            }
         },
     });
 
@@ -176,38 +156,7 @@ const CreateResume = () => {
                         Add Optional Field
                     </button>
 
-                    <div className="flex justify-between mt-4">
-                        <button
-                            type="submit"
-                            className="bg-green-500 text-white px-4 py-2 rounded-md shadow hover:bg-green-600"
-                        >
-                            Generate Link
-                        </button>
-                        {generatedLink && (
-                            <a
-                                href={generatedLink}
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                className="bg-gray-500 text-white px-4 py-2 rounded-md shadow hover:bg-gray-600"
-                            >
-                                View Resume
-                            </a>
-                        )}
-                        <button
-                            type="button"
-                            onClick={() => {
-                                if (generatedLink) {
-                                    navigator.clipboard.writeText(generatedLink);
-                                    alert("Link copied to clipboard!");
-                                } else {
-                                    alert("No link generated yet. Click 'Generate Link' first.");
-                                }
-                            }}
-                            className="bg-gray-500 text-white px-4 py-2 rounded-md shadow hover:bg-gray-600"
-                        >
-                            Copy Link
-                        </button>
-
+                    <div className="flex justify-end mt-4">
                         <button
                             type="button"
                             onClick={handleDownloadPDF}
