@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
 import { FormProvider } from "./FormContext";
+import { Analytics } from "@vercel/analytics/react"
 
 
 const geistSans = localFont({
@@ -30,7 +31,7 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <FormProvider>{children}</FormProvider>
+        <FormProvider>{children} <Analytics/></FormProvider>
       </body>
     </html>
   );
